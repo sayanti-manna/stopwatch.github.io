@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="#">
+    <title>Stop Watch</title>
+    <link rel="icon" href="images/url_logo.png"height="10px" width="10px">
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
+
+
+
+    <style type="text/css">
+        body{
+            background-color: #171A21;
+        }
+        .light_mode{
+            background-color: white;
+        }
+ *{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+        .swatch{
+            background-image: url(clock.svg);
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .watch{
+            min-width: 20%;
+            max-width: 100%;
+            margin: 150px auto;
+            font-family: "Times New Roman";
+        }
+        #heading{
+            margin-top: 135px;
+            padding-bottom:60px;
+            text-decoration: underline;
+            font-size: 20px;
+            color: white;
+        }
+
+        #timer{
+            font-size: 2.5em;
+            color: white;
+        }
+
+        #start {
+          margin: 20px auto;
+          text-align: center;
+          color: #DAD6D6;
+          background: #48633B;
+          border:solid 2px #35492C;
+          border-radius:5px;
+          padding:16px 40px 10px;
+          letter-spacing: 2px;
+          cursor:pointer;
+        }
+
+        #stop {
+          margin: 20px 5px auto;
+          text-align: center;
+          color: #DAD6D6;
+          background: #721329;
+          border:solid 2px #590F20;
+          border-radius:5px;
+          padding:16px 40px 10px;
+          letter-spacing: 2px;
+          cursor:pointer;
+        }
+
+        #reset {
+          margin: 20px auto;
+          text-align: center;
+          color: #DAD6D6;
+          background: #564E58;
+          border:solid 2px #3E383F;
+          border-radius:5px;
+          padding:16px 40px 10px;
+          letter-spacing: 2px;
+          cursor:pointer;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 col-xs-12">
+            <p style="color: #66ff66; font-size:32px;padding:70px 40px; font-family: 'Cookie', cursive;/*margin-top:100px;margin-right: 100px;margin-left: 80px;*/">A stopwatch is a handheld timepiece designed to measure the amount of time that elapses between its activation and deactivation.A large digital version of a stopwatch designed for viewing at a distance, as in a sports stadium, is called a stop clock. In manual timing, the clock is started and stopped by a person pressing a button. In fully automatic time, both starting and stopping are triggered automatically, by sensors. The timing functions are traditionally controlled by two buttons on the case. Pressing the top button starts the timer running, and pressing the button a second time stops it, leaving the elapsed time displayed. A press of the second button then resets the stopwatch to zero.</p>       
+            </div>
+            <div class="col-md-6 col-xs-12 swatch">
+                <center>
+                    <div class="watch">
+                        <h4 id="heading">DIGITAL STOPWATCH</h4>
+                        <h1 id="timer">00<span style="font-size: 14px; color:#ff9999;">min</span>:00<span style="font-size:14px; color:#b3ffff;">sec</span>:00</h1>
+                        <button id="start" onclick="start();">Start</button>
+                        <button id="stop" onclick="stop();">Stop</button>
+                        <button id="reset" onclick="reset();">Reset</button>
+                    </div>
+                </center>
+                     
+            </div>
+        </div>        
+    </div>
+    
+<center><div >
+    <button id="mode" onclick="myFunction()" style="padding:5px 20px; border-radius: 20px; background-color: purple; color:#e6ffff;font-weight:bold;border:2px solid #e6ffff;">Light mode</button>
+</div></center>
+  
+    <script type="text/javascript">
+        var min = 0;
+var sec = 0;
+var miliSec = 0;
+var timer;
+
+function callTimer() {
+    miliSec++;
+    if (miliSec < 100) {
+        if (miliSec === 99) {
+            miliSec = 0;
+            sec++;
+            if (sec === 60)  {
+                sec = 0;
+                min++;
+            }
+        }
+    }
+    else{
+        miliSec = 0;
+    }
+    document.getElementById("timer").innerHTML = min + ":" + sec + ":" + miliSec;
+}
+
+
+function start() {
+    document.getElementById("start").disabled = true;
+    timer = setInterval(callTimer, 10);
+}
+
+function stop() {
+    document.getElementById("start").disabled = false;
+    clearInterval(timer);
+}
+
+function reset() {
+    stop();
+    min = 0;
+    sec = 0;
+    miliSec = 0;
+    document.getElementById("timer").innerHTML = min + "0:" + sec + "0:" + miliSec+"0";
+}
+    </script>
+
+
+   
+<script type="text/javascript">
+    function myFunction(){
+        var x = document.getElementById("mode");
+            if(x.innerHTML === "Light mode"){
+                x.innerHTML = "Dark mode";
+            }
+            else{
+                x.innerHTML = "Light mode";
+            }
+        var element = document.body;
+        element.classList.toggle("light_mode");    
+    }
+</script>
+</body>
+</html>
